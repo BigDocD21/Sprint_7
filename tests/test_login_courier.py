@@ -14,13 +14,11 @@ class TestCourierAuthPositive:
             "login": courier["login"],
             "password": courier["password"]
         }
+
         with allure.step("Действие: отправка запроса на авторизацию"):
             response = requests.post(f"{BASE_URL}/courier/login", json=payload)
 
-        try:
-            response_data = response.json()
-        except ValueError:
-            response_data = {}
+        response_data = response.json()
 
         assert response.status_code == 200, (
             f"Ожидался статус 200, но получен статус {response.status_code}. "
